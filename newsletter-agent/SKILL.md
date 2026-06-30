@@ -35,13 +35,16 @@ This is the on-ramp skill from the Night Shift episode "Build a Daily Newsletter
 
 ### Step 0 — Pick your topic
 
-Set one variable. That's the whole config.
+`TOPIC` is the only one you have to touch — the creator fills the rest when it builds your instance.
 
 ```
-TOPIC = "AI and Claude news"     # or "World Cup", "commercial real estate", whatever you'll read
+TOPIC     = "AI and Claude news"   # or "World Cup", "commercial real estate", whatever you'll read
 RECIPIENT = "you@example.com"
-SEND_TIME = "07:00"              # your local morning
-ITEMS = 6                        # how many stories per brief
+CADENCE   = "daily"                # "daily" or "weekly" — sets the research lookback (see Gather)
+SEND_TIME = "07:00"                # daily → every morning; weekly → e.g. Mondays 07:00
+ITEMS     = 6                      # how many stories per brief
+SOURCES   = []                     # the confirmed source set (the creator researches + fills this)
+BRAND     = {}                     # voice + visual (the creator fills this; else a clean default)
 ```
 
 Pick something you actually enjoy. The fun is what gets you to finish the build — and a finished agent beats a perfect idea you never shipped.
@@ -52,11 +55,12 @@ Pick something you actually enjoy. The fun is what gets you to finish the build 
 
 ### Step 1 — Gather
 
-Search the web for the day's top stories on `{TOPIC}`. Cast wide, then you'll narrow.
+Pull the top stories on `{TOPIC}` from your `{SOURCES}` (or broad web search if none are set). **Lookback window = `{CADENCE}`:** daily looks at the last 24h, weekly at the prior week — keep research in sync with the schedule.
 
 ```
-Search: "{TOPIC}" latest news, past 24 hours
-Pull: title, source, link, published time, a 1-2 sentence gist
+For each source in SOURCES (else web search):
+  Pull: title, source, link, published time, a 1-2 sentence gist
+  Window: last 24h (daily) / last 7 days (weekly)
 Target: 12-20 raw candidates before curation
 ```
 
@@ -64,15 +68,15 @@ Target: 12-20 raw candidates before curation
 
 From the raw candidates, keep the best `{ITEMS}`. Rank by:
 - **Signal over noise** — real developments beat hot takes and rumors
-- **Freshness** — today's news, not last week's recycled
+- **Freshness** — within the lookback window, not recycled
 - **Variety** — don't return six versions of the same story; dedupe
 - **Relevance to `{TOPIC}`** — drop the tangents
 
-For each keeper, write a tight summary (2-3 sentences) plus a one-line **"Why it matters."** That "why" line is the value — it's the part a raw feed can't give you.
+**Use the sources the way they were set up:** where they overlap, *corroborate* a claim across them before trusting it (never run a shaky single-source item); where they're additive, *weave* the different angles together. For each keeper, write a tight summary (2-3 sentences) plus a one-line **"Why it matters."** That "why" line is the value — it's the part a raw feed can't give you.
 
 ### Step 3 — Format
 
-Build a clean HTML email. Keep it scannable: a title, the date, then each item as a bolded headline + summary + why-line + source link. No walls of text. (Template: `email-template.html` in this skill.)
+Build a clean, scannable HTML email — title, date, then each item as a bolded headline + summary + why-line + source link. No walls of text. **Apply `{BRAND}`:** write the summaries in the brand voice (tone, pacing), and style the template in the brand visual (colors, fonts) where one is set; otherwise use the clean editorial default. (Template: `email-template.html` in this skill.)
 
 ### Step 4 — Deliver
 
