@@ -29,6 +29,15 @@ Four moves — **Show · Hook · Instruct · Publish** — plus a load-and-analy
 
 ---
 
+### Pick the topic (before anything else)
+
+You can't Show examples without a subject, so settle the topic first.
+
+- **Ask:** *"What's one subject you wish you just stayed on top of, without doing the work yourself?"*
+- **If they don't know** (a real stuck point), don't push — *discover it.* Ask a few light questions about their professional and personal life: their role and what they're responsible for, what they already keep half an eye on, a market or competitor that affects them, a hobby they'd love a daily pulse on. From that, **recommend 2–3 candidate topics** and let them pick. The goal is one topic they'll actually want to open every day.
+
+---
+
 ### S — SHOW · lock what "good" looks like, first
 
 Make success concrete before anything else. Three paths in, depending on the user:
@@ -37,7 +46,7 @@ Make success concrete before anything else. Three paths in, depending on the use
 - **They have an example they love** → ask them to paste it, and **extract the success criteria from it** (length, format, tone, sectioning, how it opens).
 - **They don't know what they want** (most common) → *don't make them invent it.* Show them **three example briefs to choose from**, plus a short list of elements to think about. They pick one (or mix two), and you derive success from the choice.
 
-**The three example archetypes** (show a short rendered sample of each):
+**The three example archetypes** — the agent **generates a real, rendered sample of each on the user's actual topic**, so they can scan and read three tangible briefs, not pick a category off a menu. (Use real-world newsletters — Morning Brew, theSkimm, Lenny's — as *inspiration* for the formats, but what the user sees is a fresh sample built for them, populated with plausible items on their topic.)
 1. **The Quick Brief** — punchy and skimmable. 5–6 one-line items, bold headline + a single *why-it-matters* line. For "just give me the signal in 2 minutes." (Morning Brew / theSkimm energy.)
 2. **The Editorial** — fewer, deeper. 3–4 items, each with 2–3 sentences of context and a point of view. For "depth over breadth." (A curator with a take.)
 3. **The Lead + Hits** — a "big one" up top with real context, then 4–5 rapid-fire hits below. The hybrid. For "one thing that matters + stay current."
@@ -62,13 +71,18 @@ Make success concrete before anything else. Three paths in, depending on the use
 
 This is the biggest step. Once the outcome and success are locked, the agent **guides the user through the inputs needed to hit it** — and again, it proposes; the user confirms. Two families: *memory* (what it knows / how it should look and sound) and *data sources* (where the information comes from), plus the *tools* it acts with.
 
-**Memory inputs — brand identity (pull from assets if they exist; sensible defaults if not):**
-- **Brand visual** — colors, fonts, styles. (From `brand-visuals.md` / brand assets, or a clean editorial default.)
-- **Brand voice** — tone, pacing, personality, sentence structure, language. (From `brand-voice.md`, or a calm, plain default.)
+**Memory inputs — brand identity.** If brand assets exist, pull from them. **If they don't, ask** — a couple of light questions, or offer a clean default to accept (don't make a first-timer stall here):
+- **Brand visual** — colors, fonts, styles. (From `brand-visuals.md` / brand assets; otherwise ask "got brand colors/fonts, or want a clean editorial default?")
+- **Brand voice** — tone, pacing, personality, sentence structure, language. (From `brand-voice.md`; otherwise ask a quick "neutral, or with a point of view? formal or casual?")
 - Any context docs the agent should lean on (positioning, glossary, past issues).
 
 **Data sources — researched & recommended by the agent, then confirmed:**
-The agent **researches and recommends the best 3–5 sources** for `{TOPIC}`, then the user confirms ~3 to **cross-check** against each other (triangulation beats any single feed — it's what kills hallucination and one-outlet bias). The recommended set must include:
+The agent **researches and recommends the best 3–5 sources** for `{TOPIC}`, then the user confirms ~3. How the sources relate **depends on the topic** — name the role of each:
+- **Corroborate** — overlapping sources you cross-check against each other (kills hallucination + single-outlet bias). Right for hard news, claims, numbers.
+- **Enrich / additive** — sources that cover *different* angles or slices and complement each other (e.g. one for results, one for analysis, one for the human-interest/community take). Right for broad or multi-faceted topics.
+- Most topics want a mix of both. The agent picks the right blend and says why.
+
+The recommended set must include:
 - **At least one free source** — Reddit, official-site scraping, or RSS feeds.
 - **At least one connection-based source** — something via MCP / API. Favor data-rich providers (Tavily, Apify, and similar — free or paid).
 - Round out with whatever else fits the topic (newsletters, lab blogs, a niche aggregator).
@@ -89,8 +103,8 @@ With everything hooked up, the agent **loads and analyzes all the inputs** befor
 Now define the work. Because success is locked and inputs are analyzed, **the agent creates the playbook** — the steps that turn these inputs into the success output — plus the **rules, constraints, and guardrails** that keep inputs landing on the desired output. Then it confirms with the user.
 
 **The playbook (agent drafts):**
-1. **Gather** — pull from the confirmed sources, last 24h, cross-checking across them.
-2. **Decide** — apply the keep/drop taste rules, dedupe, verify a claim appears in ≥2 sources, rank, take the top `{ITEMS}`.
+1. **Gather** — pull from the confirmed sources. **Lookback window = the schedule cadence:** a daily routine looks at the last 24h, a weekly routine at the prior week. (Keep research and schedule in sync — see Publish.)
+2. **Decide** — apply the keep/drop taste rules, dedupe, rank, take the top `{ITEMS}`. Where sources overlap, corroborate a claim before trusting it; where they're additive, weave the different angles together.
 3. **Format** — lay it out in the chosen archetype, in brand visual + voice, per the design guidelines below.
 4. **Deliver** — send to `{RECIPIENT}` at `{SEND_TIME}`.
 
@@ -123,7 +137,7 @@ Don't ship blind. Run **three test rounds** so the agent earns trust before it g
 
 1. **Three practice runs** — run the agent against recent history (e.g. each of the last 3 days). Each round, show the real output and check it against the Show checklist.
 2. **Incorporate feedback every round** — the agent folds in the user's preferences and lessons across *all* aspects: curation, sources, voice, visual, layout, length. By round three it should be clearing the checklist on its own.
-3. **Schedule it (live, on screen)** — set the routine and show it being created. Example: *every Monday at 7:00 AM*, or *every morning at 7* — the user's cadence. (In Wilson OS: a cron in `cron-registry.json` + `tools/sync_crons.py`. Outside it: any scheduler or a Claude scheduled run.)
+3. **Schedule it (live, on screen)** — set the routine and show it being created. **Cadence and research window move together:** a daily routine researches the last 24h, a weekly routine the prior week. Example: *every morning at 7* (daily), or *every Monday at 7:00 AM* (weekly digest). (In Wilson OS: a cron in `cron-registry.json` + `tools/sync_crons.py`. Outside it: any scheduler or a Claude scheduled run.)
 4. **Hand back:** *"Here's your agent. It cleared the checklist three runs straight, it's in your voice and brand, and it runs at {SCHEDULE}. Swap the topic anytime."*
 
 ---
