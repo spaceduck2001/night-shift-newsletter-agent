@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{TOPIC}} brief</title>
+</head>
+<!--
+  Newsletter Agent — email template (canonical warm-parchment surface).
+  Inline styles only (email clients strip <style>). Replace {{TOKENS}} at send time.
+  Tokens: {{TOPIC}} {{DATE}} {{ITEMS_HTML}} {{RECIPIENT_NAME}} {{SKOOL_LINK}}
+  Each item in {{ITEMS_HTML}} follows the ITEM BLOCK pattern below.
+-->
+<body style="margin:0; padding:0; background:#f4ede4; font-family:Georgia,'Times New Roman',serif; color:#2b2b26;">
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f4ede4; padding:24px 0;">
+    <tr>
+      <td align="center">
+        <table role="presentation" width="600" cellpadding="0" cellspacing="0" style="max-width:600px; width:100%; background:#fbf7f0; border:1px solid #e4d9c6; border-radius:8px; overflow:hidden;">
+
+          <!-- Masthead -->
+          <tr>
+            <td style="padding:28px 32px 18px 32px; border-bottom:1px solid #e4d9c6;">
+              <div style="font-size:13px; letter-spacing:2px; text-transform:uppercase; color:#9a7b4f;">Your daily brief</div>
+              <div style="font-size:26px; font-weight:bold; color:#3d3a2f; margin-top:4px;">{{TOPIC}}</div>
+              <div style="font-size:13px; color:#8a8576; margin-top:6px;">{{DATE}}</div>
+            </td>
+          </tr>
+
+          <!-- Items -->
+          <tr>
+            <td style="padding:8px 32px 8px 32px;">
+              {{ITEMS_HTML}}
+            </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr>
+            <td style="padding:18px 32px 28px 32px; border-top:1px solid #e4d9c6;">
+              <div style="font-size:13px; color:#8a8576; line-height:1.6;">
+                Built by your newsletter agent. Change the topic anytime by editing one line.
+              </div>
+              <div style="font-size:13px; color:#8a8576; margin-top:10px;">
+                Want to build your own? <a href="{{SKOOL_LINK}}" style="color:#b5532a; text-decoration:underline;">Grab the free skill</a>.
+              </div>
+            </td>
+          </tr>
+
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>
+
+<!--
+  ITEM BLOCK — repeat once per curated story, joined into {{ITEMS_HTML}}:
+
+  <div style="padding:16px 0; border-bottom:1px solid #efe7d8;">
+    <div style="font-size:17px; font-weight:bold; color:#3d3a2f; line-height:1.35;">{{ITEM_HEADLINE}}</div>
+    <div style="font-size:15px; color:#4a463c; line-height:1.6; margin-top:6px;">{{ITEM_SUMMARY}}</div>
+    <div style="font-size:14px; color:#6b5a3e; line-height:1.5; margin-top:8px;"><strong style="color:#b5532a;">Why it matters:</strong> {{ITEM_WHY}}</div>
+    <div style="font-size:13px; margin-top:8px;"><a href="{{ITEM_LINK}}" style="color:#9a7b4f; text-decoration:underline;">{{ITEM_SOURCE}}</a></div>
+  </div>
+
+  (Drop the border-bottom on the last item.)
+-->
